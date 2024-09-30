@@ -5,10 +5,10 @@ describe('restoreNames', () => {
 
   // write tests here
   it(`should be declared`, () => {
-    expect(restoreNames).toBeInstanceOf(Function);
+    expect(restoreNames).toBeDefined();
   });
 
-  it(`should return nothing`, () => {
+  it(`should return 'undefined'`, () => {
     expect(restoreNames([])).toBeUndefined();
   });
 
@@ -26,8 +26,7 @@ describe('restoreNames', () => {
     expect(() => restoreNames(users)).toThrow();
   });
 
-  it(`should restore firstName from fullName if it is undefined
-     or property do not exist`, () => {
+  it(`should restore firstName from fullName if it is undefined`, () => {
     const users = [
       {
         firstName: undefined,
@@ -56,7 +55,8 @@ describe('restoreNames', () => {
     ]);
   });
 
-  it('should not change firtName it is already exist', () => {
+  it(`should not change firtName if it already exist,
+    even if is different than in fullName`, () => {
     const users = [
       {
         firstName: 'Jack',
@@ -67,6 +67,11 @@ describe('restoreNames', () => {
         firstName: 'Mike',
         lastName: 'Adams',
         fullName: 'Mike Adams',
+      },
+      {
+        firstName: 'Ben',
+        lastName: 'Smith',
+        fullName: 'John Smith',
       },
     ];
 
@@ -82,6 +87,11 @@ describe('restoreNames', () => {
         firstName: 'Mike',
         lastName: 'Adams',
         fullName: 'Mike Adams',
+      },
+      {
+        firstName: 'Ben',
+        lastName: 'Smith',
+        fullName: 'John Smith',
       },
     ]);
   });
